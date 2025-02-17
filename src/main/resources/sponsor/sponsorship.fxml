@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <?import javafx.scene.control.Button?>
-        <?import javafx.scene.control.TableColumn?>
-        <?import javafx.scene.control.TextField?>
-        <?import javafx.scene.layout.AnchorPane?>
-        <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="800.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SponsorshipController">
     <children>
-        <TableView fx:id="sponsorshipTableView">
+        <TableView fx:id="sponsorshipTableView" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="822.0">
             <columns>
-                <TableColumn fx:id="sponsorshipIdColumn" text="ID"/>
                 <TableColumn fx:id="sponsorshipTypeColumn" text="Type"/>
                 <TableColumn fx:id="sponsorshipDescriptionColumn" text="Description"/>
                 <TableColumn fx:id="sponsorshipAmountColumn" text="Amount"/>
@@ -20,12 +20,12 @@
             </columns>
         </TableView>
 
-        <TextField fx:id="newSponsorshipTypeField" layoutX="114.0" layoutY="521.0" promptText="Type" />
-        <TextField fx:id="newSponsorshipDescriptionField" layoutX="114.0" layoutY="585.0" promptText="Description" />
-        <TextField fx:id="newSponsorshipAmountField" layoutX="414.0" layoutY="521.0" promptText="Amount" />
-        <TextField fx:id="newSponsorshipStartDateField" layoutX="414.0" layoutY="585.0" promptText="Start Date" />
-        <TextField fx:id="newSponsorshipEndDateField" layoutX="414.0" layoutY="649.0" promptText="End Date" />
-        <TextField fx:id="newSponsorshipStatusField" layoutX="414.0" layoutY="713.0" promptText="Status" />
+        <TextField fx:id="newSponsorshipTypeField" layoutX="114.0" layoutY="421.0" promptText="Type" />
+        <TextField fx:id="newSponsorshipDescriptionField" layoutX="114.0" layoutY="485.0" promptText="Description" />
+        <TextField fx:id="newSponsorshipAmountField" layoutX="414.0" layoutY="421.0" promptText="Amount" />
+        <DatePicker fx:id="newSponsorshipStartDateField" layoutX="414.0" layoutY="485.0" promptText="Start Date" />
+        <DatePicker fx:id="newSponsorshipEndDateField" layoutX="414.0" layoutY="549.0" promptText="End Date" />
+        <TextField fx:id="newSponsorshipStatusField" layoutX="414.0" layoutY="613.0" promptText="Status" />
 
         <Button fx:id="newSponsorshipButton" layoutX="686.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleNewSponsorshipButton" prefHeight="40.0" prefWidth="120.0" text="Add" />
         <Button fx:id="updateSponsorshipButton" layoutX="686.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleModifySponsorshipButton" prefHeight="40.0" prefWidth="120.0" text="Update" />

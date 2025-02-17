@@ -12,7 +12,9 @@ import services.SponsorshipService;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,10 +54,10 @@ public class SponsorshipController implements Initializable {
     private TextField newSponsorshipAmountField;
 
     @FXML
-    private TextField newSponsorshipStartDateField;
+    private DatePicker newSponsorshipStartDateField;
 
     @FXML
-    private TextField newSponsorshipEndDateField;
+    private DatePicker newSponsorshipEndDateField;
 
     @FXML
     private TextField newSponsorshipStatusField;
@@ -79,8 +81,7 @@ public class SponsorshipController implements Initializable {
     }
 
     private void configureTableView() {
-        sponsorshipIdColumn.setCellValueFactory(new PropertyValueFactory<>("idSponso"));
-        sponsorshipTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeSponso"));
+         sponsorshipTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeSponso"));
         sponsorshipDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionSponso"));
         sponsorshipAmountColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
         sponsorshipStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
@@ -93,16 +94,16 @@ public class SponsorshipController implements Initializable {
         String type = newSponsorshipTypeField.getText().trim();
         String description = newSponsorshipDescriptionField.getText().trim();
         BigDecimal amount = new BigDecimal(newSponsorshipAmountField.getText().trim());
-        LocalDateTime startDate = LocalDateTime.parse(newSponsorshipStartDateField.getText().trim());
-        LocalDateTime endDate = LocalDateTime.parse(newSponsorshipEndDateField.getText().trim());
+        LocalDate startDate = newSponsorshipStartDateField.getValue();
+        LocalDate endDate = newSponsorshipEndDateField.getValue();
         String status = newSponsorshipStatusField.getText().trim();
 
         Sponsorship newSponsorship = new Sponsorship();
         newSponsorship.setTypeSponso(type);
         newSponsorship.setDescriptionSponso(description);
         newSponsorship.setMontant(amount);
-        newSponsorship.setDate_debut(startDate);
-        newSponsorship.setDate_fin(endDate);
+        newSponsorship.setDate_debut(LocalDateTime.of(startDate, LocalTime.MIDNIGHT));
+        newSponsorship.setDate_fin(LocalDateTime.of(endDate, LocalTime.MIDNIGHT));
         newSponsorship.setStatut(status);
 
         sponsorshipService.addSponsorship(newSponsorship);
@@ -117,15 +118,15 @@ public class SponsorshipController implements Initializable {
             String type = newSponsorshipTypeField.getText().trim();
             String description = newSponsorshipDescriptionField.getText().trim();
             BigDecimal amount = new BigDecimal(newSponsorshipAmountField.getText().trim());
-            LocalDateTime startDate = LocalDateTime.parse(newSponsorshipStartDateField.getText().trim());
-            LocalDateTime endDate = LocalDateTime.parse(newSponsorshipEndDateField.getText().trim());
+            LocalDate startDate = newSponsorshipStartDateField.getValue();
+            LocalDate endDate = newSponsorshipEndDateField.getValue();
             String status = newSponsorshipStatusField.getText().trim();
 
             selectedSponsorship.setTypeSponso(type);
             selectedSponsorship.setDescriptionSponso(description);
             selectedSponsorship.setMontant(amount);
-            selectedSponsorship.setDate_debut(startDate);
-            selectedSponsorship.setDate_fin(endDate);
+            selectedSponsorship.setDate_debut(LocalDateTime.of(startDate, LocalTime.MIDNIGHT));
+            selectedSponsorship.setDate_fin(LocalDateTime.of(endDate, LocalTime.MIDNIGHT));
             selectedSponsorship.setStatut(status);
 
             sponsorshipService.updateSponsorship(selectedSponsorship);
@@ -153,8 +154,8 @@ public class SponsorshipController implements Initializable {
         newSponsorshipTypeField.setText(sponsorship.getTypeSponso());
         newSponsorshipDescriptionField.setText(sponsorship.getDescriptionSponso());
         newSponsorshipAmountField.setText(sponsorship.getMontant().toString());
-        newSponsorshipStartDateField.setText(sponsorship.getDate_debut().toString());
-        newSponsorshipEndDateField.setText(sponsorship.getDate_fin().toString());
+        newSponsorshipStartDateField.setValue(sponsorship.getDate_debut().toLocalDate());
+        newSponsorshipEndDateField.setValue(sponsorship.getDate_fin().toLocalDate());
         newSponsorshipStatusField.setText(sponsorship.getStatut());
     }
 
@@ -162,8 +163,8 @@ public class SponsorshipController implements Initializable {
         newSponsorshipTypeField.clear();
         newSponsorshipDescriptionField.clear();
         newSponsorshipAmountField.clear();
-        newSponsorshipStartDateField.clear();
-        newSponsorshipEndDateField.clear();
+        newSponsorshipStartDateField.setValue(null);
+        newSponsorshipEndDateField.setValue(null);
         newSponsorshipStatusField.clear();
     }
 }
